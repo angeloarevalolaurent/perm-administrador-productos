@@ -6,14 +6,21 @@ API hecha con Node.js, Express y TypeScript - Administrador de Productos
 
 ## 📁 Estructura del proyecto
 
-```id="9b0h8y"
+```
 rest-api-node-ts-server/
+├── node_modules/
+├── dist/
 ├── src/
+│   ├── config/
+│   │   ├── db.ts
+│   │
 │   ├── index.ts
 │   ├── server.ts
 │
-├── dist/
+├── .env
+├── .gitignore
 ├── package.json
+├── package-lock.json
 ├── tsconfig.json
 ```
 
@@ -23,7 +30,7 @@ rest-api-node-ts-server/
 
 ### 1. Inicializar proyecto Node
 
-```id="r1y0q3"
+```
 npm init
 ```
 
@@ -31,7 +38,7 @@ npm init
 
 ### 2. Instalar TypeScript
 
-```id="r8j4gm"
+```
 npm install -D typescript ts-node
 ```
 
@@ -39,7 +46,7 @@ npm install -D typescript ts-node
 
 ### 3. Instalar nodemon
 
-```id="g0s9j3"
+```
 npm install -D nodemon
 ```
 
@@ -47,15 +54,64 @@ npm install -D nodemon
 
 ### 4. Instalar Express
 
-```id="n5yq2k"
+```
 npm install express
 ```
 
 Instalar tipos de Express (TypeScript):
 
-```id="bphw4d"
+```
 npm install -D @types/express
 ```
+
+---
+
+### 5. Instalar Sequelize y PostgreSQL
+
+Instalar ORM Sequelize:
+
+```
+npm install --save sequelize
+```
+
+Instalar driver para PostgreSQL:
+
+```
+npm install --save pg pg-hstore
+```
+
+---
+
+### 6. Instalar dotenv
+
+```
+npm install dotenv
+```
+
+---
+
+## 🔐 Variables de entorno
+
+Crear un archivo `.env` en la raíz del proyecto:
+
+```
+DATABASE_URL=tu_url_de_render
+PORT=3000
+```
+
+⚠️ No subir este archivo a GitHub.
+
+Agregar a `.gitignore`:
+
+```
+.env
+```
+
+---
+
+## 🗄️ Base de datos Render
+
+Se utiliza **PostgreSQL** desplegado en la nube.
 
 ---
 
@@ -63,13 +119,13 @@ npm install -D @types/express
 
 Inicializar configuración:
 
-```id="qmt9q5"
+```
 npx tsc --init
 ```
 
 Reemplazar el contenido de `tsconfig.json` por:
 
-```json id="rj2n7p"
+```json
 {
   "compilerOptions": {
     "outDir": "./dist",
@@ -90,7 +146,7 @@ Reemplazar el contenido de `tsconfig.json` por:
 
 Agregar en `package.json`:
 
-```json id="7zdy3a"
+```json
 "scripts": {
   "dev": "nodemon --exec ts-node src/index.ts"
 }
@@ -98,7 +154,7 @@ Agregar en `package.json`:
 
 Ejecutar en desarrollo:
 
-```id="a2v8oz"
+```
 npm run dev
 ```
 
@@ -106,7 +162,7 @@ npm run dev
 
 ## ⚙️ Compilar el proyecto
 
-```id="6c84l2"
+```
 npx tsc
 ```
 
@@ -114,7 +170,7 @@ npx tsc
 
 ## ▶️ Ejecutar versión compilada
 
-```id="yqk8l4"
+```
 node dist/index.js
 ```
 
@@ -123,14 +179,17 @@ node dist/index.js
 ## 🧠 Notas
 
 * `express` permite crear el servidor y manejar rutas
-* `@types/express` agrega tipado para TypeScript
+* `sequelize` es un ORM para manejar bases de datos
+* `pg` y `pg-hstore` permiten la conexión con PostgreSQL
+* `dotenv` permite manejar variables de entorno
 * `typescript` permite usar tipado estático
 * `ts-node` ejecuta `.ts` sin compilar
 * `nodemon` reinicia el servidor automáticamente
-* `tsc` compila el proyecto a JavaScript
+* `node_modules` contiene las dependencias
+* `.env` contiene variables sensibles
 
 ---
 
 ## 📌 Estado del proyecto
 
-🚧 Backend inicial con Express configurado
+🚧 Backend con Express + Sequelize + PostgreSQL
