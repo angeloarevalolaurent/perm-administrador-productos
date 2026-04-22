@@ -68,6 +68,12 @@ npm install -D @types/express
 
 ### 5. Instalar Sequelize y PostgreSQL
 
+Instalar integración con TypeScript para Sequelize:
+
+```
+npm install sequelize-typescript
+```
+
 Instalar ORM Sequelize:
 
 ```
@@ -115,6 +121,37 @@ Se utiliza **PostgreSQL** desplegado en la nube.
 
 ---
 
+## 🖥️ Conexión con DBeaver
+
+Se utiliza DBeaver para administrar y visualizar la base de datos.
+
+### 🔌 Configuración de conexión
+
+Crear una nueva conexión PostgreSQL y completar:
+
+* **Host:** (host de Render)
+* **Port:** 5432
+* **Database:** (nombre de la base de datos)
+* **Username:** (usuario de Render)
+* **Password:** (contraseña de Render)
+
+También puedes usar directamente la `DATABASE_URL` proporcionada por Render.
+
+### 🔐 Configuración SSL (Importante)
+
+Activar SSL en la conexión:
+
+* SSL: **Require**
+* Desactivar validación estricta si es necesario
+
+### 🎯 Uso
+
+* Visualizar tablas
+* Ejecutar consultas SQL
+* Administrar datos
+
+---
+
 ## 🛠️ Configuración de TypeScript
 
 Inicializar configuración:
@@ -134,7 +171,9 @@ Reemplazar el contenido de `tsconfig.json` por:
     "strict": false,
     "sourceMap": true,
     "esModuleInterop": true,
-    "declaration": true
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["src/**/*.ts"]
 }
