@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { createProduct } from "./handlers/product";
+import { createProduct, getProducts } from "./handlers/product";
 import { handleInputErrors } from "./middleware";
 
 const router = Router( )
 
 // Routing
-router.get('/', (req, res)=> {
-    res.json('Desde GET')
-})
+router.get('/', getProducts)
+
+
 router.post('/', 
   // Validaciones
   body('name', 'El nombre del producto es obligatorio')
