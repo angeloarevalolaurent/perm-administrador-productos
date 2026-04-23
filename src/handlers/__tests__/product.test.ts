@@ -1,6 +1,6 @@
 import request from 'supertest'
 import server from "../../server";
-
+// Pruebas para el endpoint POST /api/products
 describe('POST /api/products', () => {
     // Prueba de validación de entrada
     it('should display validation errors for invalid input', async () => {
@@ -55,3 +55,34 @@ describe('POST /api/products', () => {
 
         })
     })
+
+
+    
+ 
+
+// Pruebas para el endpoint GET /api/products
+describe('GET /api/products', () => {
+
+    //  Prueba de respuesta JSON
+    it('GET a JSON response with a producta', async () => {
+        const response = await request(server)
+            .get('/api/products')
+
+        expect(response.status).toBe(404)
+    })
+
+
+
+
+    it('GET a JSON response with a producta', async () => {
+        const response = await request(server)
+            .get('/api/products')
+        expect(response.status).toBe(200)
+        expect(response.headers['content-type']).toMatch(/json/)
+        expect(response.body).toHaveProperty('data')
+
+        expect(response.body.data).toHaveLength(1)
+        expect(response.status).not.toBe(404)
+        expect(response.body).not.toHaveProperty('error')
+    })
+})
