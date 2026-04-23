@@ -5,13 +5,8 @@ import Product from "../models/Product.model";
 dotenv.config()
 
 const db = new Sequelize(process.env.DATABASE_URL!, {
-    dialectOptions: {
-        ssl: {
-            require: true,
-            rejectUnauthorized: false
-        }
-    },
-    models: [Product] // 👈 importante
+    models: [__dirname + '/../models/**/*.ts'],
+    logging: false
 })
 
 export default db

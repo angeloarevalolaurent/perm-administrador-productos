@@ -8,20 +8,17 @@ API hecha con Node.js, Express y TypeScript - Administrador de Productos
 
 ```
 rest-api-node-ts-server/
-├── node_modules/
 ├── dist/
 ├── src/
 │   ├── config/
-│   │   ├── db.ts
-│   │
+│   │   └── db.ts
 │   ├── index.ts
-│   ├── server.ts
-│
+│   └── server.ts
 ├── .env
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
-├── tsconfig.json
+└── tsconfig.json
 ```
 
 ---
@@ -68,7 +65,7 @@ npm install -D @types/express
 
 ### 5. Instalar Sequelize y PostgreSQL
 
-Instalar integración con TypeScript para Sequelize:
+Instalar integración con TypeScript:
 
 ```
 npm install sequelize-typescript
@@ -77,13 +74,13 @@ npm install sequelize-typescript
 Instalar ORM Sequelize:
 
 ```
-npm install --save sequelize
+npm install sequelize
 ```
 
 Instalar driver para PostgreSQL:
 
 ```
-npm install --save pg pg-hstore
+npm install pg pg-hstore
 ```
 
 ---
@@ -96,13 +93,31 @@ npm install dotenv
 
 ---
 
+### 7. Instalar herramientas de testing
+
+```
+npm install -D supertest @types/supertest jest @types/jest ts-jest
+```
+
+Inicializar configuración de Jest con TypeScript:
+
+```
+npx ts-jest config:init
+```
+
+```
+
+---
+
 ## 🔐 Variables de entorno
 
 Crear un archivo `.env` en la raíz del proyecto:
 
 ```
+
 DATABASE_URL=tu_url_de_render
 PORT=3000
+
 ```
 
 ⚠️ No subir este archivo a GitHub.
@@ -110,57 +125,49 @@ PORT=3000
 Agregar a `.gitignore`:
 
 ```
+
 .env
+
 ```
 
 ---
 
-## 🗄️ Base de datos Render
+## 🗄️ Base de datos
 
-Se utiliza **PostgreSQL** desplegado en la nube.
+Se utiliza PostgreSQL desplegado en la nube (Render).
 
 ---
 
 ## 🖥️ Conexión con DBeaver
 
-Se utiliza DBeaver para administrar y visualizar la base de datos.
+Herramienta utilizada para administrar la base de datos.
 
-### 🔌 Configuración de conexión
+### 🔌 Configuración
 
-Crear una nueva conexión PostgreSQL y completar:
+- Host: proporcionado por Render
+- Port: 5432
+- Database: nombre de la DB
+- Username: usuario
+- Password: contraseña
 
-* **Host:** (host de Render)
-* **Port:** 5432
-* **Database:** (nombre de la base de datos)
-* **Username:** (usuario de Render)
-* **Password:** (contraseña de Render)
+### 🔐 SSL
 
-También puedes usar directamente la `DATABASE_URL` proporcionada por Render.
-
-### 🔐 Configuración SSL (Importante)
-
-Activar SSL en la conexión:
-
-* SSL: **Require**
-* Desactivar validación estricta si es necesario
-
-### 🎯 Uso
-
-* Visualizar tablas
-* Ejecutar consultas SQL
-* Administrar datos
+- SSL: Require
+- Desactivar validación estricta si es necesario
 
 ---
 
 ## 🛠️ Configuración de TypeScript
 
-Inicializar configuración:
+Inicializar:
 
 ```
+
 npx tsc --init
-```
 
-Reemplazar el contenido de `tsconfig.json` por:
+````
+
+Configurar `tsconfig.json`:
 
 ```json
 {
@@ -168,6 +175,9 @@ Reemplazar el contenido de `tsconfig.json` por:
     "outDir": "./dist",
     "rootDir": "./src",
     "lib": ["ESNext"],
+    "target": "ESNext",
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
     "strict": false,
     "sourceMap": true,
     "esModuleInterop": true,
@@ -177,7 +187,13 @@ Reemplazar el contenido de `tsconfig.json` por:
   },
   "include": ["src/**/*.ts"]
 }
-```
+````
+
+### 🧠 Notas
+
+* Necesario para `sequelize-typescript`
+* Soporte para decorators
+* Configuración moderna con NodeNext
 
 ---
 
@@ -187,11 +203,12 @@ Agregar en `package.json`:
 
 ```json
 "scripts": {
-  "dev": "nodemon --exec ts-node src/index.ts"
+  "dev": "nodemon --exec ts-node src/index.ts",
+  "test": "jest"
 }
 ```
 
-Ejecutar en desarrollo:
+Ejecutar:
 
 ```
 npm run dev
@@ -199,7 +216,7 @@ npm run dev
 
 ---
 
-## ⚙️ Compilar el proyecto
+## ⚙️ Compilar
 
 ```
 npx tsc
@@ -207,7 +224,7 @@ npx tsc
 
 ---
 
-## ▶️ Ejecutar versión compilada
+## ▶️ Producción
 
 ```
 node dist/index.js
@@ -215,17 +232,14 @@ node dist/index.js
 
 ---
 
-## 🧠 Notas
+## 🧠 Notas generales
 
-* `express` permite crear el servidor y manejar rutas
-* `sequelize` es un ORM para manejar bases de datos
-* `pg` y `pg-hstore` permiten la conexión con PostgreSQL
-* `dotenv` permite manejar variables de entorno
-* `typescript` permite usar tipado estático
-* `ts-node` ejecuta `.ts` sin compilar
-* `nodemon` reinicia el servidor automáticamente
-* `node_modules` contiene las dependencias
-* `.env` contiene variables sensibles
+* Express: servidor
+* Sequelize: ORM
+* pg: driver PostgreSQL
+* dotenv: variables de entorno
+* TypeScript: tipado
+* nodemon: auto-reload
 
 ---
 
