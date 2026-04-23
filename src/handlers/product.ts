@@ -75,3 +75,19 @@ export const updateAvailablebility = async (req: Request, res: Response) => {
         res.json({ data: product })
 
 }
+
+
+// Eliminar producto
+
+export const deleteProduct = async (req: Request, res: Response) => {
+
+    const { id } = req.params
+    const product = await Product.findByPk(id as string)
+
+    if(!product) {
+        return res.status(404).json({ message: 'Producto no encontrado' })
+    }
+
+    await product.destroy()
+    res.json({ message: 'Producto eliminado' })
+}
