@@ -7,7 +7,7 @@ import db from './config/db'
 async function connectDB() {
     try{
         await db.authenticate()
-        db.sync()
+        await db.sync()
         console.log(colors.blue('Conexion exitosa a la BD' ));
     } catch (error) {
         console.log(error)
@@ -17,7 +17,12 @@ async function connectDB() {
 
 connectDB()
 
+
+//Instancia de express
 const server = express()
+
+//Leer datos de formulario
+server.use(express.json())
 
 server.use('/api/products', router)
 

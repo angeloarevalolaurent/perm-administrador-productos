@@ -7,7 +7,6 @@ const router = Router( )
 router.get('/', (req, res)=> {
     res.json('Desde GET')
 })
-
 router.post('/', createProduct)
 
 router.put('/', (req, res)=> {
@@ -15,7 +14,7 @@ router.put('/', (req, res)=> {
 })
 
 router.patch('/', (req, res)=> {
-    res.json('Desde PACHT')
+    res.json('Desde PAHT')
 })
 
 router.delete('/', (req, res)=> {
