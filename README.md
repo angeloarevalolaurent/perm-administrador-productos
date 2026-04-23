@@ -172,6 +172,7 @@ Configurar `tsconfig.json`:
 ```json
 {
   "compilerOptions": {
+    "types": ["jest"],
     "outDir": "./dist",
     "rootDir": "./src",
     "lib": ["ESNext"],
@@ -204,7 +205,7 @@ Agregar en `package.json`:
 ```json
 "scripts": {
   "dev": "nodemon --exec ts-node src/index.ts",
-  "test": "jest"
+  "test": "jest --detectOpenHandles"
 }
 ```
 
