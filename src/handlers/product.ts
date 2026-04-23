@@ -45,7 +45,7 @@ export const createProduct = async (req: Request, res: Response) => {
 }
 
 
-// Actualizar producto
+// Actualizar producto PUT
 export const updateProduct = async (req: Request, res: Response) => {
  
         const { id } = req.params
@@ -59,3 +59,19 @@ export const updateProduct = async (req: Request, res: Response) => {
         res.json({ data: product })
       
     }
+
+// Actualizar disponibilidad PATCH
+export const updateAvailablebility = async (req: Request, res: Response) => {
+
+      const { id } = req.params
+        const product = await Product.findByPk(id as string)
+       
+        if(!product) {
+            return res.status(404).json({ message: 'Producto no encontrado' })
+        }
+        
+        product.availability = !product.dataValues.availability
+        await product.save()
+        res.json({ data: product })
+
+}
